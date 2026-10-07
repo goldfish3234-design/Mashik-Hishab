@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>মাসিক হিসাব</title>
+<meta name="theme-color" content="#2f3f9e">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="মাসিক হিসাব">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232f3f9e'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='white'%3E%E0%A7%B3%3C/text%3E%3C/svg%3E">
+<link rel="manifest" href='data:application/manifest+json,{"name":"মাসিক হিসাব","short_name":"হিসাব","display":"standalone","background_color":"#eef1f6","theme_color":"#2f3f9e","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%232f3f9e%27/%3E%3Ctext x=%2750%27 y=%2768%27 font-size=%2758%27 text-anchor=%27middle%27 fill=%27white%27%3E%E0%A7%B3%3C/text%3E%3C/svg%3E","sizes":"any","type":"image/svg+xml"}]}'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;700&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef1f6;--card:#fff;--ink:#1c2340;--mute:#6b738f;--line:#d9deea;--in:#0f8a6d;--out:#c8384f;--acc:#2f3f9e;--bar:#dfe4f2}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121626;--card:#1a2037;--ink:#e8ebf7;--mute:#9098b8;--line:#2b3352;--in:#3ec9a2;--out:#ff7a8e;--acc:#8d9bff;--bar:#2b3352}}
+:root[data-theme="dark"]{--bg:#121626;--card:#1a2037;--ink:#e8ebf7;--mute:#9098b8;--line:#2b3352;--in:#3ec9a2;--out:#ff7a8e;--acc:#8d9bff;--bar:#2b3352}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hind Siliguri","Noto Sans Bengali","Kalpurush",system-ui,sans-serif;line-height:1.5}
+main{max-width:640px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+h1{font-size:1.5rem;margin:0;font-weight:700}
+input,select,button{font:inherit;color:inherit}
+input,select{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.sum{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.bal{font-size:2.4rem;font-weight:700;line-height:1.1}
+.bal small{display:block;font-size:.95rem;font-weight:400;color:var(--mute)}
+.row2{display:flex;gap:10px;margin-top:12px}
+.row2>div{flex:1;border-top:3px solid;padding-top:6px}
+.row2 .i{border-color:var(--in)}.row2 .o{border-color:var(--out)}
+.row2 b{display:block;font-size:1.2rem}
+.i b{color:var(--in)}.o b{color:var(--out)}
+.mute{color:var(--mute);font-size:.9rem}
+form{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+form .full{grid-column:1/-1}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg label{flex:1;text-align:center;padding:8px;cursor:pointer}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg input:checked+span{font-weight:700}
+.seg label:has(input:checked){background:var(--acc);color:var(--card)}
+.add{background:var(--acc);color:var(--card);border:0;border-radius:8px;padding:10px;font-weight:700;cursor:pointer}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:14px}
+h2{font-size:1.05rem;margin:0 0 10px}
+.cat{margin-bottom:8px}
+.cat div:first-child{display:flex;justify-content:space-between}
+.track{height:8px;background:var(--bar);border-radius:4px;overflow:hidden}
+.fill{height:100%;background:var(--out)}
+ul{list-style:none;margin:0;padding:0}
+li{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+li:last-child{border:0}
+li .t{flex:1;min-width:0}
+li .t span{display:block;overflow-wrap:anywhere}
+li .a{font-weight:700;white-space:nowrap}
+li.in .a{color:var(--in)}li.out .a{color:var(--out)}
+li button{background:none;border:0;color:var(--mute);cursor:pointer;font-size:1.1rem;padding:4px 8px}
+.empty{color:var(--mute);text-align:center;padding:12px 0}
+.tools{display:flex;gap:8px;justify-content:flex-end}
+.tools button{background:none;border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>মাসিক হিসাব</h1>
+  <input type="month" id="month" aria-label="মাস বেছে নিন">
+</header>
+
+<div class="sum">
+  <div class="bal"><small>এই মাসে হাতে আছে</small><span id="bal">৳০</span></div>
+  <div class="row2">
+    <div class="i"><span class="mute">মোট আয়</span><b id="inc">৳০</b></div>
+    <div class="o"><span class="mute">মোট খরচ</span><b id="exp">৳০</b></div>
+  </div>
+</div>
+
+<form id="f">
+  <div class="seg full" role="radiogroup" aria-label="ধরন">
+    <label><input type="radio" name="type" value="out" checked><span>খরচ</span></label>
+    <label><input type="radio" name="type" value="in"><span>আয়</span></label>
+  </div>
+  <input type="number" id="amt" placeholder="টাকার পরিমাণ" min="1" step="any" required inputmode="decimal">
+  <select id="cat" aria-label="ক্যাটাগরি"></select>
+  <input type="text" id="note" class="full" placeholder="বিবরণ (ঐচ্ছিক)" maxlength="80">
+  <input type="date" id="date" required>
+  <button class="add" type="submit">যোগ করুন</button>
+</form>
+
+<section>
+  <h2>খরচ কোথায় গেল</h2>
+  <div id="cats"></div>
+</section>
+
+<section>
+  <h2>লেনদেনের তালিকা</h2>
+  <ul id="list"></ul>
+  <div class="tools"><button id="exp-csv" type="button">CSV নামান</button><button id="clear" type="button">এই মাসের সব মুছুন</button></div>
+</section>
+</main>
+
+<script>
+(function(){
+  var KEY="masik-hishab-v1";
+  var CATS={out:["খাবার","বাড়িভাড়া","যাতায়াত","বিল","চিকিৎসা","কেনাকাটা","শিক্ষা","অন্যান্য"],in:["বেতন","ব্যবসা","উপহার","অন্যান্য"]};
+  var data=[];
+  try{var s=localStorage.getItem(KEY);if(s)data=JSON.parse(s)||[];}catch(e){data=[];}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){}}
+  var $=function(id){return document.getElementById(id)};
+  var fmt=function(n){return "৳"+Number(n).toLocaleString("bn-BD",{maximumFractionDigits:2})};
+  var today=new Date();
+  var pad=function(n){return String(n).padStart(2,"0")};
+  var todayStr=today.getFullYear()+"-"+pad(today.getMonth()+1)+"-"+pad(today.getDate());
+  $("month").value=todayStr.slice(0,7);
+  $("date").value=todayStr;
+
+  function type(){return document.querySelector('input[name=type]:checked').value}
+  function fillCats(){
+    $("cat").innerHTML=CATS[type()].map(function(c){return "<option>"+c+"</option>"}).join("");
+  }
+  fillCats();
+  document.querySelectorAll('input[name=type]').forEach(function(r){r.addEventListener("change",fillCats)});
+
+  function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML}
+  function render(){
+    var m=$("month").value;
+    var items=data.filter(function(e){return e.date.slice(0,7)===m}).sort(function(a,b){return a.date<b.date?1:-1});
+    var inc=0,exp=0,by={};
+    items.forEach(function(e){
+      if(e.type==="in")inc+=e.amt;else{exp+=e.amt;by[e.cat]=(by[e.cat]||0)+e.amt;}
+    });
+    $("inc").textContent=fmt(inc);$("exp").textContent=fmt(exp);
+    var b=inc-exp;$("bal").textContent=(b<0?"−":"")+fmt(Math.abs(b));
+    $("bal").style.color=b<0?"var(--out)":"var(--ink)";
+    var keys=Object.keys(by).sort(function(a,b){return by[b]-by[a]});
+    $("cats").innerHTML=keys.length?keys.map(function(k){
+      var p=exp?Math.round(by[k]/exp*100):0;
+      return '<div class="cat"><div><span>'+esc(k)+'</span><span>'+fmt(by[k])+' <span class="mute">('+p.toLocaleString("bn-BD")+'%)</span></span></div><div class="track"><div class="fill" style="width:'+p+'%"></div></div></div>';
+    }).join(""):'<div class="empty">এই মাসে কোনো খরচ লেখা হয়নি।</div>';
+    $("list").innerHTML=items.length?items.map(function(e){
+      var d=e.date.slice(8,10);
+      return '<li class="'+e.type+'"><div class="t"><span>'+esc(e.note||e.cat)+'</span><span class="mute">'+Number(d).toLocaleString("bn-BD")+' তারিখ · '+esc(e.cat)+'</span></div><span class="a">'+(e.type==="in"?"+":"−")+fmt(e.amt)+'</span><button type="button" data-id="'+e.id+'" aria-label="মুছুন">✕</button></li>';
+    }).join(""):'<div class="empty">কিছু যোগ করলে এখানে দেখা যাবে।</div>';
+  }
+
+  $("f").addEventListener("submit",function(ev){
+    ev.preventDefault();
+    var a=parseFloat($("amt").value);
+    if(!(a>0))return;
+    data.push({id:Date.now()+Math.random().toString(16).slice(2,6),type:type(),cat:$("cat").value,note:$("note").value.trim(),amt:a,date:$("date").value});
+    save();
+    $("amt").value="";$("note").value="";
+    $("month").value=$("date").value.slice(0,7);
+    render();$("amt").focus();
+  });
+  $("list").addEventListener("click",function(ev){
+    var id=ev.target.getAttribute&&ev.target.getAttribute("data-id");
+    if(!id)return;
+    data=data.filter(function(e){return String(e.id)!==id});save();render();
+  });
+  $("month").addEventListener("change",render);
+  $("clear").addEventListener("click",function(){
+    var m=$("month").value;
+    if(!confirm("এই মাসের সব লেনদেন মুছে যাবে। নিশ্চিত?"))return;
+    data=data.filter(function(e){return e.date.slice(0,7)!==m});save();render();
+  });
+  $("exp-csv").addEventListener("click",function(){
+    var m=$("month").value;
+    var rows=["তারিখ,ধরন,ক্যাটাগরি,বিবরণ,টাকা"].concat(data.filter(function(e){return e.date.slice(0,7)===m}).map(function(e){
+      return [e.date,e.type==="in"?"আয়":"খরচ",e.cat,'"'+(e.note||"").replace(/"/g,'""')+'"',e.amt].join(",");
+    }));
+    var blob=new Blob(["\ufeff"+rows.join("\n")],{type:"text/csv;charset=utf-8"});
+    var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="hishab-"+m+".csv";a.click();
+  });
+  render();
+})();
+</script>
+</body>
+</html>
