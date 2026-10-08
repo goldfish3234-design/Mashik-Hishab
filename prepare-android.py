@@ -27,7 +27,7 @@ for d, (l, f) in dens.items():
 os.makedirs(res + "/values", exist_ok=True)
 with open(res + "/values/ic_launcher_background.xml", "w") as fh:
     fh.write('<?xml version="1.0" encoding="utf-8"?>\n<resources>\n'
-             '    <color name="ic_launcher_background">#2F3F9E</color>\n</resources>\n')
+             '    <color name="ic_launcher_background">#0F7A4A</color>\n</resources>\n')
 
 # plain colour splash instead of the default image
 for f in glob.glob(res + "/drawable*/splash.png"):
@@ -36,7 +36,7 @@ os.makedirs(res + "/drawable", exist_ok=True)
 with open(res + "/drawable/splash.xml", "w") as fh:
     fh.write('<?xml version="1.0" encoding="utf-8"?>\n'
              '<layer-list xmlns:android="http://schemas.android.com/apk/res/android">\n'
-             '    <item><shape android:shape="rectangle"><solid android:color="#2F3F9E"/></shape></item>\n'
+             '    <item><shape android:shape="rectangle"><solid android:color="#0F7A4A"/></shape></item>\n'
              '</layer-list>\n')
 
 gp = "android/app/build.gradle"
