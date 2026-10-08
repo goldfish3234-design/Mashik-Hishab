@@ -11,9 +11,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232f3f9e'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='white'%3E%E0%A7%B3%3C/text%3E%3C/svg%3E">
 <link rel="manifest" href='data:application/manifest+json,{"name":"মাসিক হিসাব","short_name":"হিসাব","display":"standalone","background_color":"#eef1f6","theme_color":"#2f3f9e","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%232f3f9e%27/%3E%3Ctext x=%2750%27 y=%2768%27 font-size=%2758%27 text-anchor=%27middle%27 fill=%27white%27%3E%E0%A7%B3%3C/text%3E%3C/svg%3E","sizes":"any","type":"image/svg+xml"}]}'>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;700&display=swap">
 <style>
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+:root{box-sizing:border-box;padding-top:var(--safe-area-inset-top,env(safe-area-inset-top,0px));padding-bottom:var(--safe-area-inset-bottom,env(safe-area-inset-bottom,0px));
 --bg:#eef1f6;--card:#fff;--ink:#1c2340;--mute:#6b738f;--line:#d9deea;--in:#0f8a6d;--out:#c8384f;--acc:#2f3f9e;--bar:#dfe4f2}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121626;--card:#1a2037;--ink:#e8ebf7;--mute:#9098b8;--line:#2b3352;--in:#3ec9a2;--out:#ff7a8e;--acc:#8d9bff;--bar:#2b3352}}
 :root[data-theme="dark"]{--bg:#121626;--card:#1a2037;--ink:#e8ebf7;--mute:#9098b8;--line:#2b3352;--in:#3ec9a2;--out:#ff7a8e;--acc:#8d9bff;--bar:#2b3352}
@@ -171,8 +170,16 @@ li button{background:none;border:0;color:var(--mute);cursor:pointer;font-size:1.
     var rows=["তারিখ,ধরন,ক্যাটাগরি,বিবরণ,টাকা"].concat(data.filter(function(e){return e.date.slice(0,7)===m}).map(function(e){
       return [e.date,e.type==="in"?"আয়":"খরচ",e.cat,'"'+(e.note||"").replace(/"/g,'""')+'"',e.amt].join(",");
     }));
-    var blob=new Blob(["\ufeff"+rows.join("\n")],{type:"text/csv;charset=utf-8"});
-    var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="hishab-"+m+".csv";a.click();
+    var text="\ufeff"+rows.join("\n"),name="hishab-"+m+".csv";
+    var C=window.Capacitor;
+    if(C&&C.isNativePlatform&&C.isNativePlatform()&&C.Plugins&&C.Plugins.Filesystem&&C.Plugins.Share){
+      C.Plugins.Filesystem.writeFile({path:name,data:text,directory:"CACHE",encoding:"utf8"}).then(function(r){
+        return C.Plugins.Share.share({title:name,files:[r.uri],dialogTitle:"হিসাব সেভ করুন"});
+      }).catch(function(e){if(String((e&&e.message)||e).toLowerCase().indexOf("cancel")<0)alert("ফাইল তৈরি করা যায়নি");});
+      return;
+    }
+    var blob=new Blob([text],{type:"text/csv;charset=utf-8"});
+    var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();
   });
   render();
 })();
