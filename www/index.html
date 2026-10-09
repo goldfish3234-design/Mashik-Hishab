@@ -79,7 +79,14 @@ textarea{font:inherit;color:inherit;background:var(--card);border:1.5px solid va
 <div class="acts"><button class="pill" id="csv" type="button"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>CSV সেভ</button><button class="pill d" id="clr" type="button"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>মাস মুছুন</button></div>
 </section>
 <section class="pg" id="p3">
-<h1>টিপস ও আর্টিকেল</h1><input id="q" placeholder="🔍 টিপস খুঁজুন..." style="margin-top:10px"><div class="chips" id="tc"></div><div id="ta"></div>
+<h1>টিপস ও নোট</h1>
+<div class="seg"><button type="button" class="i on" id="sgt">💡 টিপস</button><button type="button" class="i" id="sgn">📝 নোট</button></div>
+<div id="tw"><input id="q" placeholder="🔍 টিপস খুঁজুন..."><div class="chips" id="tc"></div><div id="ta"></div></div>
+<div id="nw" style="display:none">
+<div class="mute">বাজার লিস্ট, করণীয় বা যেকোনো কিছু লিখে রাখুন</div>
+<div class="chips"><button class="chip" type="button" data-nt="0">🛒 বাজার লিস্ট</button><button class="chip" type="button" data-nt="1">✅ করণীয়</button><button class="chip" type="button" data-nt="2">💸 ধার-বাকি</button><button class="chip" type="button" data-nt="3">📝 সাধারণ নোট</button></div>
+<div id="nls"></div>
+</div>
 </section>
 <section class="pg" id="p4">
 <h1>সঞ্চয়ের লক্ষ্য</h1>
@@ -87,13 +94,8 @@ textarea{font:inherit;color:inherit;background:var(--card);border:1.5px solid va
 <div id="gls"></div>
 <div class="card tipc"><div class="em">🌱</div><p>আজ একটু সঞ্চয়, আগামীকাল বড় স্বাধীনতা।</p></div>
 </section>
-<section class="pg" id="p5">
-<h1>নোট</h1><div class="mute">বাজার লিস্ট, করণীয় বা যেকোনো কিছু লিখে রাখুন</div>
-<div class="chips"><button class="chip" type="button" data-nt="0">🛒 বাজার লিস্ট</button><button class="chip" type="button" data-nt="1">✅ করণীয়</button><button class="chip" type="button" data-nt="2">💸 ধার-বাকি</button><button class="chip" type="button" data-nt="3">📝 সাধারণ নোট</button></div>
-<div id="nls"></div>
-</section>
 </main>
-<nav><button id="n1" class="on"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9H4z"/></svg>হোম</button><button id="n2"><svg viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>বিশ্লেষণ</button><button class="fab" id="fb" aria-label="নতুন লেনদেন">+</button><button id="n5"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h6"/></svg>নোট</button><button id="n3"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-4 10.4c.7.7 1 1.4 1 2.6h6c0-1.2.3-1.9 1-2.6A6 6 0 0012 3z"/></svg>টিপস</button><button id="n4"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>লক্ষ্য</button></nav>
+<nav><button id="n1" class="on"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9H4z"/></svg>হোম</button><button id="n2"><svg viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>বিশ্লেষণ</button><button class="fab" id="fb" aria-label="নতুন লেনদেন">+</button><button id="n3"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-4 10.4c.7.7 1 1.4 1 2.6h6c0-1.2.3-1.9 1-2.6A6 6 0 0012 3z"/></svg>টিপস</button><button id="n4"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>লক্ষ্য</button></nav>
 <div class="ov" id="ad"><form class="sh" id="f"><h2 style="margin:0">নতুন হিসাব যোগ করুন</h2><div class="seg"><button type="button" class="o on" id="so">ব্যয়</button><button type="button" class="i" id="si">আয়</button></div>
 <input id="amt" type="number" placeholder="পরিমাণ (৳)" min="1" step="any" required inputmode="decimal"><div class="cc" id="cc"></div><input id="note" placeholder="নোট (ঐচ্ছিক)" maxlength="80"><input id="date" type="date" required style="margin-top:10px"><div class="row"><button type="button" id="cn">বাতিল</button><button class="go" type="submit">সংরক্ষণ করুন</button></div></form></div>
 <div class="ov" id="md"><div class="sh"><h2 id="mt"></h2><div class="mute" id="mx"></div><input id="mi" type="number" inputmode="decimal" placeholder="টাকা" style="margin-top:10px;display:none"><div class="row"><button id="mn" type="button">থাক</button><button class="go" id="my" type="button">ঠিক আছে</button></div></div></div>
@@ -133,8 +135,10 @@ $("cats").innerHTML=k.length?k.map(function(c){var q=Math.round(by[c]/t.o*100);r
 $("gls").innerHTML=goals.length?goals.map(function(g,i){var q=Math.min(100,Math.round(g.s/g.t*100));return'<div class="card gl"><div class="r"><b>'+esc(g.n)+'</b><span class="mute">'+bn(q)+'%</span></div><div class="mute">'+fmt(g.s)+' / '+fmt(g.t)+'</div><div class="tr" style="margin:8px 0"><i style="width:'+q+'%"></i></div><div class="r"><button class="sm" data-dp="'+i+'">＋ জমা করুন</button><button class="x" data-gd="'+i+'" aria-label="মুছুন"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div></div>'}).join(""):'<div class="empty">কোনো লক্ষ্য নেই, উপরে একটা যোগ করুন</div>'}
 function shift(d){var p=ym.split("-"),x=new Date(+p[0],+p[1]-1+d,1);ym=x.getFullYear()+"-"+pad(x.getMonth()+1);render()}
 document.querySelectorAll(".pv").forEach(function(b){b.onclick=function(){shift(-1)}});document.querySelectorAll(".nx").forEach(function(b){b.onclick=function(){shift(1)}});
-function go(n){for(var i=1;i<6;i++){$("p"+i).classList.toggle("on",i==n);if($("n"+i))$("n"+i).classList.toggle("on",i==n)}window.scrollTo(0,0)}
-[1,2,3,4,5].forEach(function(i){$("n"+i).onclick=function(){go(i)}});
+function go(n){for(var i=1;i<5;i++){$("p"+i).classList.toggle("on",i==n);if($("n"+i))$("n"+i).classList.toggle("on",i==n)}window.scrollTo(0,0)}
+[1,2,3,4].forEach(function(i){$("n"+i).onclick=function(){go(i)}});
+function sg(n){$("tw").style.display=n?"none":"";$("nw").style.display=n?"":"none";$("sgt").classList.toggle("on",!n);$("sgn").classList.toggle("on",!!n)}
+$("sgt").onclick=function(){sg(0)};$("sgn").onclick=function(){sg(1)};
 function cc(){$("cc").innerHTML=CATS[tp].map(function(c,i){return'<button type="button" class="chip'+(i?"":" on")+'">'+c+'</button>'}).join("");$("so").classList.toggle("on",tp==="out");$("si").classList.toggle("on",tp==="in")}
 $("so").onclick=function(){tp="out";cc()};$("si").onclick=function(){tp="in";cc()};
 $("cc").onclick=function(e){if(e.target.classList.contains("chip")){this.querySelectorAll(".chip").forEach(function(c){c.classList.remove("on")});e.target.classList.add("on")}};
@@ -152,7 +156,7 @@ if(d){var i=+d.dataset.dp;dlg("জমার পরিমাণ",goals[i].n,1,fun
 if(x){var j=+x.dataset.gd;dlg("লক্ষ্যটা মুছবেন?",goals[j].n,0,function(){goals.splice(j,1);sv(GK,goals);render()},1)}};
 $("csv").onclick=function(){var L=items().slice().reverse();if(!L.length){toast("সেভ করার মতো কিছু নেই");return}var t=tot(),r=["তারিখ,ধরন,ক্যাটাগরি,বিবরণ,টাকা"];
 L.forEach(function(e){r.push([e.date,e.type==="in"?"আয়":"খরচ",e.cat,'"'+(e.note||"").replace(/"/g,'""')+'"',e.amt].join(","))});r.push(",,,মোট আয়,"+t.i);r.push(",,,মোট খরচ,"+t.o);r.push(",,,বাকি,"+(t.i-t.o));
-var x="﻿"+r.join("\n"),n="hishab-"+ym+".csv",C=window.Capacitor;
+var x="\uFEFF"+r.join("\n"),n="hishab-"+ym+".csv",C=window.Capacitor;
 if(C&&C.isNativePlatform&&C.isNativePlatform()&&C.Plugins&&C.Plugins.Filesystem&&C.Plugins.Share){C.Plugins.Filesystem.writeFile({path:n,data:x,directory:"CACHE",encoding:"utf8"}).then(function(f){return C.Plugins.Share.share({title:n,files:[f.uri],dialogTitle:"হিসাব সেভ করুন"})}).catch(function(e){if(String((e&&e.message)||e).toLowerCase().indexOf("cancel")<0)toast("ফাইল তৈরি করা যায়নি")});return}
 var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([x],{type:"text/csv;charset=utf-8"}));a.download=n;a.click()};
 var NK="moneymap-notes-v1",notes=ld(NK),XI='<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>',
